@@ -7,7 +7,7 @@ const quizRoute = require('./routes/answers')
 const ejsMate = require('ejs-mate');
 const bodyParser = require('body-parser');
 const Quiz = require('./models/quizques');
-mongoose.connect('mongodb://127.0.0.1:27017/visionQuest', {
+mongoose.connect('mongodb+srv://aryan242003:Aryankr2411_@cluster0.7hl6laz.mongodb.net/', {
     useNewUrlParser: true, useUnifiedTopology: true
 });
 const db = mongoose.connection;
