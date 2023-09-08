@@ -6,7 +6,6 @@ exports.getTeam = (req, res, next) => {
 
 exports.makeTeam = async (req, res, next) => {
     const newTeam = new Team(req.body);
-    console.log(newTeam);
     const industry = Math.floor(Math.random() * 10) + 1;
     newTeam.industry = industry;
     newTeam.score = 0;
