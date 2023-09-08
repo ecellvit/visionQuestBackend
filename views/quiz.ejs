@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Questions here
+    Question:
+    <br>
+    <br>
+    <form action="/quiz/questions" method="post">
+        <ul class="quiz">
+            <li>
+                <h4>
+                    <%= ques.question %>
+                </h4>
+                <ul class="choices">
+
+                    <label><input type="radio" name="question" value=0 /><span>
+                            <%=ques.options[0] %>
+                        </span></label>
+                    <br>
+                    <br>
+                    <label><input type="radio" name="question" value=1 />
+                        <span>
+                            <%= ques.options[1] %>
+                        </span></label>
+                    <br>
+                    <br>
+                    <label><input type="radio" name="question" value=2 /><span>
+                            <%= ques.options[2]%>
+                        </span></label>
+                    <br>
+                    <br>
+                    <label><input type="radio" name="question" value=3 /><span>
+                            <%= ques.options[3] %>
+                        </span></label>
+                </ul>
+            </li>
+            <button>Check</button>
+    </form>
+    <% %>
+</body>
+
+</html>
