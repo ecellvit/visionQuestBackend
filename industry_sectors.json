@@ -1,0 +1,37 @@
+{
+    "IT Industry": [
+        "Research and development",
+        "Connectivity",
+        "Marketing",
+        "Logistics",
+        "Inventory Management"
+    ],
+    "Fashion Industry": [
+        "Research and development",
+        "Inventory Management",
+        "Logistics",
+        "Marketing",
+        "Connectivity"
+    ],
+    "Petrochemical Industry": [
+        "Research and development",
+        "Inventory Management",
+        "Logistics",
+        "Marketing",
+        "Connectivity"
+    ],
+    "Automobile Industry": [
+        "Research and development",
+        "Connectivity",
+        "Logistics",
+        "Inventory Management",
+        "Marketing"
+    ],
+    "Finance Industry": [
+        "Research and development",
+        "Connectivity",
+        "Inventory Management",
+        "Logistics",
+        "Marketing"
+    ]
+}

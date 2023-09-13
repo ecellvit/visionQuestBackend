@@ -1,0 +1,110 @@
+{
+    "IT": {
+        "Top": [
+            "Bangalore, Karnataka",
+            "Hyderabad, Telangana",
+            "Pune, Maharashtra"
+        ],
+        "Mediocre": [
+            "Chennai, Tamil Nadu",
+            "Mumbai, Maharashtra",
+            "Delhi",
+            "Kolkata, West Bengal"
+        ],
+        "Below Mediocre": [
+            "Ahmedabad, Gujarat",
+            "Indore, Madhya Pradesh",
+            "Jaipur, Rajasthan"
+        ]
+    },
+    "Fashion": {
+        "Top": [
+            "Mumbai, Maharashtra",
+            "Delhi",
+            "Bangalore, Karnataka"
+        ],
+        "Mediocre": [
+            "Chennai, Tamil Nadu",
+            "Hyderabad, Telangana",
+            "Kolkata, West Bengal",
+            "Ahmedabad, Gujarat"
+        ],
+        "Below Mediocre": [
+            "Jaipur, Rajasthan",
+            "Surat, Gujarat",
+            "Kochi, Kerala"
+        ]
+    },
+    "Petrochemical": {
+        "Top": [
+            "Mumbai, Maharashtra",
+            "Jamnagar, Gujarat",
+            "Gandhinagar, Gujarat"
+        ],
+        "Mediocre": [
+            "Haldia, West Bengal",
+            "Visakhapatnam, Andhra Pradesh",
+            "Nagothane, Maharashtra",
+            "Kochi, Kerala"
+        ],
+        "Below Mediocre": [
+            "Panipat, Haryana",
+            "Dahej, Gujarat",
+            "Barauni, Bihar"
+        ]
+    },
+    "Healthcare": {
+        "Top": [
+            "Pune, Maharashtra",
+            "Ahmedabad, Gujarat",
+            "Bangalore, Karnataka"
+        ],
+        "Mediocre": [
+            "Mumbai, Maharashtra",
+            "Chennai, Tamil Nadu",
+            "Hyderabad, Telangana",
+            "Kolkata, West Bengal"
+        ],
+        "Below Mediocre": [
+            "Delhi-NCR",
+            "Lucknow, Uttar Pradesh",
+            "Patna, Bihar"
+        ]
+    },
+    "Finance": {
+        "Top": [
+            "Mumbai, Maharashtra",
+            "Delhi",
+            "Bangalore, Karnataka"
+        ],
+        "Mediocre": [
+            "Chennai, Tamil Nadu",
+            "Hyderabad",
+            "Kolkata",
+            "Ahmedabad"
+        ],
+        "Below Mediocre": [
+            "Pune",
+            "Surat",
+            "Indore"
+        ]
+    },
+    "Automobile": {
+        "Top": [
+            "Chennai",
+            "Pune",
+            "Gurugram"
+        ],
+        "Mediocre": [
+            "Ahmedabad",
+            "Bangalore",
+            "Jamshedpur",
+            "Indore"
+        ],
+        "Below Mediocre": [
+            "Kochi, Kerala",
+            "Lucknow",
+            "Coimbatore"
+        ]
+    }
+}
