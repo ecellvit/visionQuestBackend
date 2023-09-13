@@ -1,0 +1,92 @@
+{
+    "first Card": {
+        "Top": [
+            200,
+            180,
+            150
+        ],
+        "Mediocre": [
+            100,
+            80,
+            60,
+            50
+        ],
+        "Below Mediocre": [
+            50,
+            30,
+            20
+        ]
+    },
+    "second Card": {
+        "Top": [
+            200,
+            180,
+            150
+        ],
+        "Mediocre": [
+            100,
+            80,
+            60,
+            50
+        ],
+        "Below Mediocre": [
+            50,
+            30,
+            20
+        ]
+    },
+    "third Card": {
+        "Top": [
+            180,
+            150,
+            120
+        ],
+        "Mediocre": [
+            80,
+            70,
+            60,
+            50
+        ],
+        "Below Mediocre": [
+            30,
+            20,
+            10
+        ]
+    },
+    "fourth Card": {
+        "Top": [
+            160,
+            140,
+            120
+        ],
+        "Mediocre": [
+            70,
+            60,
+            50,
+            40
+        ],
+        "Below Mediocre": [
+            30,
+            20,
+            10
+        ]
+    },
+    "fifth Card": {
+        "Top": [
+            140,
+            120,
+            100
+        ],
+        "Mediocre": [
+            60,
+            50,
+            40,
+            30
+        ],
+        "Below Mediocre": [
+            30,
+            20,
+            10
+        ]
+    }
+}

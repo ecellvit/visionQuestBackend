@@ -6,6 +6,10 @@ const teamSchema = mongoose.Schema(
             type: String,
             unique: true
         },
+        teamLeaderId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Users",
+        },
         teamnumber: {
             type: Number
         },
@@ -22,11 +26,35 @@ const teamSchema = mongoose.Schema(
             type: Number
         },
         industry: {
-            type: Number
+            type: String
         },
         score: {
             type: Number
-        }
+        },
+        city: {
+            type: String
+        },
+        isQualified: {
+            type: Boolean
+        },
+        hasRoundOneStarted: {
+            type: Boolean,
+        },
+        hasRoundOneEnd: {
+            type: Boolean,
+        },
+        hasRoundTwoStarted: {
+            type: Boolean,
+        },
+        hasRoundTwoEnd: {
+            type: Boolean,
+        },
+        hasRoundThreeStarted: {
+            type: Boolean,
+        },
+        hasRoundThreeEnd: {
+            type: Boolean,
+        },
     },
     { collection: "TeamModel" }
 );
