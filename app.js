@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const teamRoute = require('./routes/team');
-// const quizRoute = require('./routes/answers')
 const ejsMate = require('ejs-mate');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
@@ -10,9 +9,8 @@ const authRoute = require('./routes/user');
 const adminRoute = require('./routes/admin');
 const round1Route = require('./routes/roundone');
 const Team = require('./models/teamModel');
-const catchAsync = require('./utils/catchAsync');
+// const catchAsync = require('./utils/catchAsync');
 require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
-
 app.use(bodyParser.urlencoded({
     extended: true
 }));
@@ -32,12 +30,6 @@ app.get('/api', (req, res) => {
 app.use('/api/makeTeam', teamRoute);
 app.use('/api/auth', authRoute);
 app.use('/admin/round1', adminRoute);
-app.use('/api/round1', round1Route);
-
-// app.post('/api/scores', catchAsync(async (req, res) => {
-//     const team = await Team.findOne({ teamname: req.params.teamname });
-//     res.status(200).json({
-//         team.score
-// })});
+app.use('/api/roundOne', round1Route);
 
 module.exports = app;

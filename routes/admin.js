@@ -3,5 +3,6 @@ const router = express.Router();
 const round1 = require('../controllers/roundone/assignCity');
 const auth = require('../middleware/authmiddleware');
 router.route('/')
-    .post(auth, round1.assignCity)
+    .get(round1.getCity)
+    .post(round1.assignCity)
 module.exports = router;

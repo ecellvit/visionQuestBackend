@@ -41,11 +41,11 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
         teamnumber: req.body.teamnumber,
         Leadername: req.body.Leadername,
         LeaderEmail: req.body.LeaderEmail,
-        teamLeaderId: req.user._id,
+        // teamLeaderId: req.user._id,
         vps: 15000,
         score: 0
     }).save();
-
+    console.log(req.body);
     res.status(201).json({
         message: "New Team Created Successfully",
         teamId: newTeam._id,

@@ -6,7 +6,6 @@ module.exports = (fn) => {
         fn(req, res, next).catch((err) => {
             const message = `Exception: ${err}`;
             console.log(err);
-
             next(new AppError(message, 500, errorCodes.EXCEPTION));
         });
     };

@@ -13,14 +13,14 @@ db.once("open", () => {
 
 
 const industries = [
-    'IT Industry',
-    'Fashion Industry',
-    'Petrochemical Industry',
-    'Automobile Industry',
-    'Healthcare Industry',
-    'Finance Industry',
+    'IT',
+    'Fashion',
+    'Petrochemical',
+    'Automobile',
+    'Healthcare',
+    'Finance',
 ];
-const maxTeamsPerIndustry = 10;
+const maxTeamsPerIndustry = 3;
 
 async function assignIndustriesToTeams() {
     try {
@@ -48,6 +48,7 @@ async function assignIndustriesToTeams() {
             }
 
             team.industry = randomIndustry;
+            team.industryIdx = industries.indexOf(randomIndustry);
             updatedTeams.push(team);
         }
 
