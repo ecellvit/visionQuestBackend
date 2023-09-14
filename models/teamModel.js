@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-
 const teamSchema = mongoose.Schema(
     {
         teamname: {
@@ -28,11 +27,17 @@ const teamSchema = mongoose.Schema(
         industry: {
             type: String
         },
+        industryIdx: {
+            type: Number
+        },
         score: {
             type: Number
         },
         city: {
             type: String
+        },
+        cityIdx: {
+            type: Number
         },
         isQualified: {
             type: Boolean
