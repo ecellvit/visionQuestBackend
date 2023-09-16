@@ -9,6 +9,7 @@ const authRoute = require('./routes/user');
 const adminRoute = require('./routes/admin');
 const round1Route = require('./routes/roundone');
 const Team = require('./models/teamModel');
+const scoreRoute = require('./routes/scores')
 // const catchAsync = require('./utils/catchAsync');
 require("dotenv").config({ path: path.resolve(__dirname, "./.env") });
 app.use(bodyParser.urlencoded({
@@ -31,5 +32,6 @@ app.use('/api/makeTeam', teamRoute);
 app.use('/api/auth', authRoute);
 app.use('/admin/round1', adminRoute);
 app.use('/api/roundOne', round1Route);
+app.use('/api/getVps', scoreRoute);
 
 module.exports = app;

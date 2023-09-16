@@ -24,8 +24,7 @@ const maxTeamsPerIndustry = 3;
 
 async function assignIndustriesToTeams() {
     try {
-        const teams = await Team.find({}).exec();
-
+        const teams = await Team.find({});
         // Shuffle the list of teams randomly
         const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
 
