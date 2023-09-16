@@ -31,7 +31,7 @@ exports.getCards = catchAsync(async (req, res, next) => {
   })
 });
 
-exports.postInvestment = catchAsync(async (req, res) => {
+exports.postInvestment = catchAsync(async (req, res, next) => {
   const email = "fgdf@dsg.com";
   const team = await Team.findOne({ LeaderEmail: email });
   const teamCityIdx = team.cityIdx;
@@ -53,6 +53,11 @@ exports.postInvestment = catchAsync(async (req, res) => {
         roiVal += ((roiJson[i][teamCityIdx]) * (investedAmt[i])) / 100;
       }
     }
+    else {
+      return next(
+        new AppError("Something Went Wrong", 412, errorCodes.UNKNOWN_ERROR)
+      );
+    }
     await Team.findOneAndUpdate({ LeaderEmail: email }, {
       $set: {
         vps: updatedAmt
@@ -65,7 +70,18 @@ exports.postInvestment = catchAsync(async (req, res) => {
       roiVal
     })
   }
-  else {
-    res.send('total amount invested more than available')
+  if (totalInvested === 0) {
+    return next(
+      new AppError("You must Invest in atleast one of the Sectors", 412, errorCodes.INVALID_INVESTMENT)
+    );
+  }
+  if (totalInvested > team.vps) {
+    return next(
+      new AppError("Invested amount more than VPS", 412, errorCodes.INVALID_INVESTMENT)
+    );
   }
 });
+
+// exports.roundOneEnd(catchAsync(async (req, res, next) => {
+  
+// }))
