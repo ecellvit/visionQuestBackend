@@ -7,11 +7,14 @@ const { errorCodes } = require('../../utils/constants');
 const User = require('../../models/user');
 const { generateTeamToken } = require("./utils");
 
-exports.getTeam = (req, res, next) => {
-    console.log("User ID: " + res.user._id);
-    res.status(201).json({
-        message: "Get Team Form",
-    });
+exports.getTeam = async (req, res, next) => {
+    // console.log("User ID: " + req.user._id);
+    const user = await User.findById(req.user._id);
+    const email = user.email;
+    const team = await Team.findOne({ LeaderEmail: email });
+    res.json({
+        team
+    })
 }
 
 exports.makeTeam = catchAsync(async (req, res, next) => {

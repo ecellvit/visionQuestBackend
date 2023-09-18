@@ -2,7 +2,6 @@ const express = require('express');
 
 const path = require('path');
 const teamRoute = require('./routes/team');
-const ejsMate = require('ejs-mate');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const authRoute = require('./routes/user');
@@ -46,16 +45,7 @@ morgan.token("req-headers", function (req, res) {
 
 process.env.NODE_ENV != "production" &&
     app.use(morgan(":method :url :status :req-headers"));
-
-app.use(express.json())
 app.use(express.urlencoded({ extended: true }));
-app.engine('ejs', ejsMate);
-app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
-
-app.get('/api', (req, res) => {
-    res.render('frontpage');
-})
 
 app.use('/api/makeTeam', teamRoute);
 app.use('/api/auth', authRoute);
