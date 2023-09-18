@@ -6,8 +6,12 @@ const AppError = require('../../utils/appError');
 const { errorCodes } = require('../../utils/constants');
 const User = require('../../models/user');
 const { generateTeamToken } = require("./utils");
+
 exports.getTeam = (req, res, next) => {
-    res.render('maketeam');
+    console.log("User ID: " + res.user._id);
+    res.status(201).json({
+        message: "Get Team Form",
+    });
 }
 
 exports.makeTeam = catchAsync(async (req, res, next) => {
