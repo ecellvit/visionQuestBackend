@@ -47,7 +47,7 @@ process.env.NODE_ENV != "production" &&
     app.use(morgan(":method :url :status :req-headers"));
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/makeTeam', teamRoute);
+app.use('/api/team', teamRoute);
 app.use('/api/auth', authRoute);
 app.use('/admin/round1', adminRoute);
 app.use('/api/roundOne', round1Route);

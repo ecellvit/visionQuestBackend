@@ -44,13 +44,18 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
     };
 
     const newTeam = await new Team({
-        teamname: req.body.teamname,
-        teamnumber: req.body.teamnumber,
-        Leadername: req.body.Leadername,
-        LeaderEmail: req.body.LeaderEmail,
+        teamName: req.body.teamName,
+        teamNumber: req.body.teamNumber,
+        leaderName: req.body.leaderName,
+        leaderEmail: req.body.leaderEmail,
         // teamLeaderId: req.user._id,
         vps: 15000,
-        score: 0
+        hasRoundOneStarted: false,
+        hasRoundOneEnded: false,
+        hasRoundTwoStarted: false,
+        hasRoundTwoEnded: false,
+        hasRoundThreeStarted: false,
+        hasRoundThreeEnded: false
     }).save();
     console.log(req.body);
     res.status(201).json({
