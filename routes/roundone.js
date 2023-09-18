@@ -4,7 +4,8 @@
 const express = require('express');
 const router = express.Router();
 const roundOne = require('../controllers/roundone/investingRound');
+const { hasRoundOneStarted } = require('../middleware/middleware');
 router.route('/')
-    .get(roundOne.getCards)
-    .post(roundOne.postInvestment)
+    .get(hasRoundOneStarted, roundOne.getCards)
+    .post(hasRoundOneStarted, roundOne.postInvestment)
 module.exports = router;

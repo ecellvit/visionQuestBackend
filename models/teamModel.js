@@ -30,7 +30,10 @@ const teamSchema = mongoose.Schema(
         industryIdx: {
             type: Number
         },
-        score: {
+        roiVal: {
+            type: Number
+        },
+        valuation: {
             type: Number
         },
         city: {

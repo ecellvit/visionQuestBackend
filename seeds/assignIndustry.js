@@ -1,36 +1,21 @@
-const mongoose = require('mongoose');
-const path = require('path');
-const Team = require('../models/teamModel'); // Import your Team model here
-require("dotenv").config({ path: path.resolve(__dirname, "../.env") });
-mongoose.connect(process.env.db_url, {
-    useNewUrlParser: true, useUnifiedTopology: true
-});
-const db = mongoose.connection;
-db.on("error", console.error.bind(console, "Connection error"));
-db.once("open", () => {
-    console.log("Connected");
-});
-
-
-const industries = [
-    'IT',
-    'Fashion',
-    'Petrochemical',
-    'Automobile',
-    'Healthcare',
-    'Finance',
-];
-const maxTeamsPerIndustry = 3;
-
-async function assignIndustriesToTeams() {
+const Team = require('../models/teamModel');
+const catchAsync = require('../utils/catchAsync');
+const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
     try {
+        const industries = [
+            'IT',
+            'Fashion',
+            'Petrochemical',
+            'Automobile',
+            'Healthcare',
+            'Finance',
+        ];
         const teams = await Team.find({});
+        const maxTeamsPerIndustry = teams.length / 6;
         // Shuffle the list of teams randomly
         const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);
-
         const industryCounts = {};
         const updatedTeams = [];
-
         for (const team of shuffledTeams) {
             const randomIndustry = industries.find((industry) => {
                 if (!industryCounts[industry] || industryCounts[industry] < maxTeamsPerIndustry) {
@@ -57,11 +42,9 @@ async function assignIndustriesToTeams() {
         }
 
         console.log('Industries assigned to teams successfully.');
+        res.status(200).json("success");
     } catch (error) {
         console.error('Error assigning industries:', error);
-    } finally {
-        mongoose.disconnect();
     }
-}
-
-assignIndustriesToTeams();
+});
+module.exports = assignIndustriesToTeams;
