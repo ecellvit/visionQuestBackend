@@ -71,8 +71,9 @@ exports.googleAuth = catchAsync(async (req, res, next) => {
             refreshToken,
         });
     }
-
+    
     const { accessToken, refreshToken } = await generateTokens(user);
+    console.log(accessToken);
     res.status(200).json({
         message: "Logged in sucessfully",
         accessToken,
@@ -100,6 +101,6 @@ exports.logout = catchAsync(async (req, res, next) => {
             errorCodes.INVALID_TOKEN
         );
     }
-    await userToken.remove();
+    await userToken.deleteOne();
     res.status(200).json({ message: "Logged Out Sucessfully" });
 });

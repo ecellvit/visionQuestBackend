@@ -14,7 +14,8 @@ module.exports.generateTokens = async (user) => {
         });
 
         const userToken = await UserToken.findOne({ userId: user._id });
-        if (userToken) await userToken.remove();
+        console.log("!!!!!!",userToken)
+        if (userToken) await userToken.deleteOne();
 
         await new UserToken({ userId: user._id, token: refreshToken }).save();
         return Promise.resolve({ accessToken, refreshToken });

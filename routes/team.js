@@ -4,7 +4,7 @@ const catchAsync = require('../utils/catchAsync');
 const team = require('../controllers/team/team');
 const auth = require('../middleware/authmiddleware');
 router.route('/')
-    .get(team.getTeam)
-    .post(team.makeTeam)
+    .get(auth,team.getTeam)
+    .post(auth,team.makeTeam)
 
 module.exports = router;
