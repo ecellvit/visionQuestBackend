@@ -9,8 +9,14 @@ const roiJson = require('../../ROI.json');
 
 exports.getCards = catchAsync(async (req, res, next) => {
   //we need to send the sectors, city, industry name, minimum amt
-  const email = "fgdf@dsg.com";
-  const team = await Team.findOne({ LeaderEmail: email });
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    return next(
+      new AppError("User Not Found", 400, errorCodes.INVALID_USERID_FOR_TEAMID)
+    );
+  }
+  const email = user.email;
+  const team = await Team.findOne({ leaderEmail: email });
   if (!team) {
     return next(
       new AppError("Team Not Found", 412, errorCodes.INVALID_TEAM_ID)
@@ -38,8 +44,19 @@ exports.getCards = catchAsync(async (req, res, next) => {
 });
 
 exports.postInvestment = catchAsync(async (req, res, next) => {
-  const email = "roya@gmail.com";
-  const team = await Team.findOne({ LeaderEmail: email });
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    return next(
+      new AppError("User Not Found", 400, errorCodes.INVALID_USERID_FOR_TEAMID)
+    );
+  }
+  const email = user.email;
+  const team = await Team.findOne({ leaderEmail: email });
+  if (!team) {
+    return next(
+      new AppError("Team Not Found", 412, errorCodes.INVALID_TEAM_ID)
+    )
+  }
   const teamCityIdx = team.cityIdx;
   const teamIndustry = team.industry;
   const teamIndustryIdx = team.industryIdx;
@@ -72,10 +89,12 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
       );
     }
     let updatedAmt = team.vps - totalInvested + roiVal;
-    await Team.findOneAndUpdate({ LeaderEmail: email }, {
+    let valuation = updatedAmt * 100;
+    await Team.findOneAndUpdate({ leaderEmail: email }, {
       $set: {
         vps: updatedAmt,
-        roiVal: roiVal
+        roiVal: roiVal,
+        valuation: valuation
       }
     });
     console.log(roiVal);

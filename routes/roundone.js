@@ -7,6 +7,6 @@ const roundOne = require('../controllers/roundone/investingRound');
 const { hasRoundOneStarted } = require('../middleware/middleware');
 const auth = require('../middleware/authmiddleware');
 router.route('/')
-    .get(auth,hasRoundOneStarted, roundOne.getCards)
-    .post(auth,hasRoundOneStarted, roundOne.postInvestment)
+    .get(auth, hasRoundOneStarted, roundOne.getCards)
+    .post(auth, hasRoundOneStarted, roundOne.postInvestment)
 module.exports = router;

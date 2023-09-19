@@ -10,8 +10,19 @@ const { generateTeamToken } = require("./utils");
 exports.getTeam = async (req, res, next) => {
     // console.log("User ID: " + req.user._id);
     const user = await User.findById(req.user._id);
+    if (!user) {
+        return next(
+            new AppError("User Not Found", 400, errorCodes.INVALID_USERID_FOR_TEAMID)
+        );
+    }
     const email = user.email;
-    const team = await Team.findOne({ LeaderEmail: email });
+    console.log(user);
+    const team = await Team.findOne({ leaderEmail: email });
+    if (!team) {
+        return next(
+            new AppError("Team Not Found", 400, errorCodes.INVALID_TEAM_ID)
+        );
+    }
     res.json({
         team
     })
@@ -30,13 +41,13 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
     }
 
     //check whether teamname already taken
-    const team_by_name = await Team.findOne({ teamname: req.body.teamname });
+    const team_by_name = await Team.findOne({ teamName: req.body.teamName });
     if (team_by_name) {
         return next(
             new AppError("TeamName Already Exists", 412, errorCodes.TEAM_NAME_EXISTS)
         );
     }
-    const team_by_number = await Team.findOne({ teamnumber: req.body.teamnumber });
+    const team_by_number = await Team.findOne({ teamNumber: req.body.teamNumber });
     if (team_by_number) {
         return next(
             new AppError("TeamNumber Already Exists", 412, errorCodes.TEAM_NUMBER_EXISTS)
@@ -48,14 +59,15 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
         teamNumber: req.body.teamNumber,
         leaderName: req.body.leaderName,
         leaderEmail: req.body.leaderEmail,
-        // teamLeaderId: req.user._id,
         vps: 15000,
         hasRoundOneStarted: false,
         hasRoundOneEnded: false,
         hasRoundTwoStarted: false,
         hasRoundTwoEnded: false,
         hasRoundThreeStarted: false,
-        hasRoundThreeEnded: false
+        hasRoundThreeEnded: false,
+        isQualified: true,
+        currentRound: "Not Started"
     }).save();
     console.log(req.body);
     res.status(201).json({

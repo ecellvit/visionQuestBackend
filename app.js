@@ -49,7 +49,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/team', teamRoute);
 app.use('/api/auth', authRoute);
-app.use('/admin/round1', adminRoute);
+app.use('/api/admin', adminRoute);
 app.use('/api/roundOne', round1Route);
 app.use('/api/getVps', scoreRoute);
 

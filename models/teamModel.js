@@ -63,6 +63,9 @@ const teamSchema = mongoose.Schema(
         hasRoundThreeEnded: {
             type: Boolean,
         },
+        currentRound: {
+            type: String
+        }
     },
     { collection: "TeamModel" }
 );
