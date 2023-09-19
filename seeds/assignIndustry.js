@@ -1,5 +1,7 @@
 const Team = require('../models/teamModel');
+const AppError = require('../utils/appError');
 const catchAsync = require('../utils/catchAsync');
+const { errorCodes } = require('../utils/constants');
 const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
     try {
         const industries = [
@@ -11,6 +13,11 @@ const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
             'Finance',
         ];
         const teams = await Team.find({});
+        if (teams[0].industry) {
+            return next(
+                new AppError("Industry Already Assigned", 400, errorCodes.INDUSTRY_ALREADY_ASSIGNED)
+            )
+        }
         const maxTeamsPerIndustry = teams.length / 6;
         // Shuffle the list of teams randomly
         const shuffledTeams = [...teams].sort(() => Math.random() - 0.5);

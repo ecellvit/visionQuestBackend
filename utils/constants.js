@@ -6,11 +6,6 @@ const approvalStatusTypes = {
     APPROVED: 1,
 };
 
-const quizStatusTypes = {
-    NOT_STARTED: 0,
-    STARTED: 1,
-};
-
 const errorCodes = {
     UNKNOWN_ERROR: 0,
     EXCEPTION: 1,
@@ -36,7 +31,12 @@ const errorCodes = {
     AMOUNT_EXCEEDED: 21,
     CITY_NOT_FOUND: 22,
     INVALID_TEAM_NAME: 23,
-    INVALID_INVESTMENT: 24
+    INVALID_INVESTMENT: 24,
+    ROUND_ONE_NOT_STARTED: 25,
+    ROUND_ONE_NOT_ENDED: 26,
+    ROUND_TWO_NOT_STARTED: 27,
+    INDUSTRY_ALREADY_ASSIGNED: 28
+
 };
 
 const balance = 5000;

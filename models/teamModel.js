@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const teamSchema = mongoose.Schema(
     {
-        teamname: {
+        teamName: {
             type: String,
             unique: true
         },
@@ -9,13 +9,13 @@ const teamSchema = mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId,
             ref: "Users",
         },
-        teamnumber: {
+        teamNumber: {
             type: Number
         },
-        Leadername: {
+        leaderName: {
             type: String
         },
-        LeaderEmail: {
+        leaderEmail: {
             type: String
         },
         teamID: {
@@ -48,21 +48,24 @@ const teamSchema = mongoose.Schema(
         hasRoundOneStarted: {
             type: Boolean,
         },
-        hasRoundOneEnd: {
+        hasRoundOneEnded: {
             type: Boolean,
         },
         hasRoundTwoStarted: {
             type: Boolean,
         },
-        hasRoundTwoEnd: {
+        hasRoundTwoEnded: {
             type: Boolean,
         },
         hasRoundThreeStarted: {
             type: Boolean,
         },
-        hasRoundThreeEnd: {
+        hasRoundThreeEnded: {
             type: Boolean,
         },
+        currentRound: {
+            type: String
+        }
     },
     { collection: "TeamModel" }
 );
