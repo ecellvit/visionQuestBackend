@@ -6,6 +6,6 @@ const auth = require('../middleware/authmiddleware');
 router.route('/getTeam')
     .get(auth, team.getTeam)
 router.route('/createTeam')
-    .post(team.makeTeam)
+    .post(auth, team.makeTeam)
 
 module.exports = router;
