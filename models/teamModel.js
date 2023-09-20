@@ -45,23 +45,8 @@ const teamSchema = mongoose.Schema(
         isQualified: {
             type: Boolean
         },
-        hasRoundOneStarted: {
-            type: Boolean,
-        },
-        hasRoundOneEnded: {
-            type: Boolean,
-        },
-        hasRoundTwoStarted: {
-            type: Boolean,
-        },
-        hasRoundTwoEnded: {
-            type: Boolean,
-        },
-        hasRoundThreeStarted: {
-            type: Boolean,
-        },
-        hasRoundThreeEnded: {
-            type: Boolean,
+        hasSubmittedSectors: {
+            type: Boolean
         },
         currentRound: {
             type: String

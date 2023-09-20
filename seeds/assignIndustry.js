@@ -13,9 +13,14 @@ const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
             'Finance',
         ];
         const teams = await Team.find({});
+        if (!teams) {
+            return next(
+                res.status(401).json({ "message": "Something Went Wrong" })
+            )
+        }
         if (teams[0].industry) {
             return next(
-                new AppError("Industry Already Assigned", 400, errorCodes.INDUSTRY_ALREADY_ASSIGNED)
+                res.status(400).json({ "message": "Industry Already Assigned" })
             )
         }
         const maxTeamsPerIndustry = teams.length / 6;
@@ -47,7 +52,14 @@ const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
         for (const updatedTeam of updatedTeams) {
             await updatedTeam.save();
         }
-
+        teams.forEach(async function (team) {
+            await Team.findOneAndUpdate({ "_id": team._id },
+                {
+                    $set: {
+                        'currentRound': "started"
+                    }
+                });
+        });
         console.log('Industries assigned to teams successfully.');
         res.status(200).json("success");
     } catch (error) {

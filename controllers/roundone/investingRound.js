@@ -1,7 +1,5 @@
 const Team = require('../../models/teamModel')
-const AppError = require("../../utils/appError");
 const catchAsync = require("../../utils/catchAsync");
-const { errorCodes, objectIdLength } = require("../../utils/constants");
 const User = require('../../models/user');
 const sectors = require('../../card_values.json');
 const sectorName = require('../../industry_sectors.json');
@@ -12,14 +10,14 @@ exports.getCards = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id);
   if (!user) {
     return next(
-      new AppError("User Not Found", 400, errorCodes.INVALID_USERID_FOR_TEAMID)
+      res.status(401).json({ "message": "User Not Found" })
     );
   }
   const email = user.email;
   const team = await Team.findOne({ leaderEmail: email });
   if (!team) {
     return next(
-      new AppError("Team Not Found", 412, errorCodes.INVALID_TEAM_ID)
+      res.status(401).json({ "message": "Team Not Found" })
     )
   }
   const industryName = team.industry;
@@ -47,14 +45,14 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
   const user = await User.findById(req.user._id);
   if (!user) {
     return next(
-      new AppError("User Not Found", 400, errorCodes.INVALID_USERID_FOR_TEAMID)
+      res.status(401).json({ "message": "User Not Found" })
     );
   }
   const email = user.email;
   const team = await Team.findOne({ leaderEmail: email });
   if (!team) {
     return next(
-      new AppError("Team Not Found", 412, errorCodes.INVALID_TEAM_ID)
+      res.status(401).json({ "message": "Team Not Found" })
     )
   }
   const teamCityIdx = team.cityIdx;
@@ -67,8 +65,8 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
   for (let i = 0; i < investedAmt.length; i++) {
     if (investedAmt[i] != 0 && !(investedAmt[i] >= sectorVals[i])) {
       return next(
-        new AppError("Enter the base Fare at least or 0", 412, errorCodes.INVALID_INVESTMENT)
-      );
+        res.status(412).json({ "message": "The invested amount must be either 0 or more than the base fare" })
+      )
     }
   }
   let totalInvested = investedAmt.reduce(function (a, b) {
@@ -84,9 +82,11 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
       }
     }
     else {
-      return next(
-        new AppError("Something Went Wrong", 412, errorCodes.UNKNOWN_ERROR)
-      );
+      if (!team) {
+        return next(
+          res.status(412).json({ "message": "Team Not Found" })
+        )
+      };
     }
     let updatedAmt = team.vps - totalInvested + roiVal;
     let valuation = updatedAmt * 100;
@@ -106,12 +106,12 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
   }
   if (totalInvested === 0) {
     return next(
-      new AppError("You must Invest in atleast one of the Sectors", 412, errorCodes.INVALID_INVESTMENT)
+      res.status(412).json({ "message": "You must Invest in atleast one of the Sectors" })
     );
   }
   if (totalInvested > team.vps) {
     return next(
-      new AppError("Invested amount more than VPS", 412, errorCodes.INVALID_INVESTMENT)
-    );
+      res.status(412).json({ "message": "Invested amount more than VPS" })
+    )
   }
 });
