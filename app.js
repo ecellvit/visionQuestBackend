@@ -6,7 +6,9 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const authRoute = require('./routes/user');
 const adminRoute = require('./routes/admin');
+const adminRoute1=require('./routes/admin1')
 const round1Route = require('./routes/roundone');
+const round2Route = require('./routes/roundtwo');
 const Team = require('./models/teamModel');
 const scoreRoute = require('./routes/scores')
 const app = express();
@@ -52,5 +54,6 @@ app.use('/api/auth', authRoute);
 app.use('/api/admin', adminRoute);
 app.use('/api/roundOne', round1Route);
 app.use('/api/getVps', scoreRoute);
-
+app.use('/api/roundTwo',round2Route);
+app.use('/api/admin1',adminRoute1);
 module.exports = app;
