@@ -26,7 +26,7 @@ const changeState = catchAsync(async (req, res, next) => {
         await Team.findOneAndUpdate({ "_id": team._id },
             {
                 $set: {
-                    'currentRound': nextState
+                    "currentRound": nextState
                 }
             });
     })
