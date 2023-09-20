@@ -12,15 +12,15 @@ exports.getTeam = async (req, res, next) => {
     const user = await User.findById(req.user._id);
     if (!user) {
         return next(
-            new AppError("User Not Found", 400, errorCodes.INVALID_USERID_FOR_TEAMID)
+            res.status(401).json({ "message": "User Not Found" })
         );
     }
     const email = user.email;
-    console.log(user);
+    // console.log(user);
     const team = await Team.findOne({ leaderEmail: email });
     if (!team) {
         return next(
-            new AppError("Team Not Found", 400, errorCodes.INVALID_TEAM_ID)
+            res.status(404).json({ "message": "Team Not Found" })
         );
     }
     res.json({
@@ -32,43 +32,48 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
     const { error } = teamValidation(req.body);
     if (error) {
         return next(
-            new AppError(
-                error.details[0].message,
-                400,
-                errorCodes.INPUT_PARAMS_INVALID
-            )
-        );
+            res.status(400).json({ "message": error.message })
+        )
     }
 
     //check whether teamname already taken
     const team_by_name = await Team.findOne({ teamName: req.body.teamName });
     if (team_by_name) {
         return next(
-            new AppError("TeamName Already Exists", 412, errorCodes.TEAM_NAME_EXISTS)
+            res.status(412).json({ "message": "Team Name Already Exists" })
         );
     }
+
     const team_by_number = await Team.findOne({ teamNumber: req.body.teamNumber });
     if (team_by_number) {
         return next(
-            new AppError("TeamNumber Already Exists", 412, errorCodes.TEAM_NUMBER_EXISTS)
+            res.status(412).json({ "message": "Team Number Already Exists" })
         );
     };
-
+    const userID = req.user._id;
+    const user = await User.findById(userID);
+    if (req.body.leaderEmail !== user.email) {
+        return next(
+            res.status(401).json({ "message": "Enter the same email you logged in with" })
+        );
+    }
+    const teamByEmail = await Team.findOne({ email: req.body.email })
+    if (teamByEmail) {
+        return next(
+            res.status(401).json({ "message": "Team with this Email ID already Exists" })
+        );
+    }
     const newTeam = await new Team({
         teamName: req.body.teamName,
         teamNumber: req.body.teamNumber,
         leaderName: req.body.leaderName,
         leaderEmail: req.body.leaderEmail,
         vps: 15000,
-        hasRoundOneStarted: false,
-        hasRoundOneEnded: false,
-        hasRoundTwoStarted: false,
-        hasRoundTwoEnded: false,
-        hasRoundThreeStarted: false,
-        hasRoundThreeEnded: false,
         isQualified: true,
+        hasSubmittedSectors: false,
         currentRound: "Not Started"
     }).save();
+    await User.findOneAndUpdate({ email: req.body.leaderEmail }, { $set: { hasFilledDetails: true } })
     console.log(req.body);
     res.status(201).json({
         message: "New Team Created Successfully",

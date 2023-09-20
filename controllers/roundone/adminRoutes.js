@@ -11,17 +11,17 @@ exports.assignCity = catchAsync(async (req, res, next) => {
     const team = await Team.findOne({ teamName: teamName });
     if (!team) {
         return next(
-            new AppError("Team Not Found", 412, errorCodes.INVALID_TEAM_NAME)
-        );
+            res.status(401).json({ "message": "Something Went Wrong" })
+        )
     }
     if (!team.isQualified) {
         return next(
-            new AppError("Team Not Qualified", 412, errorCodes.TEAM_NOT_QUALIFIED)
+            res.status(400).json({ "message": "Team Not Qualified" })
         );
     }
     if ((!(amt < team.vps) || !(amt > 0))) {
         return next(
-            new AppError("The amount entered is INVALID", 412, errorCodes.AMOUNT_EXCEEDED)
+            res.status(400).json({ "message": "The amount entered is INVALID" })
         );
     }
     const teamvps = team.vps - amt;
@@ -36,7 +36,7 @@ exports.assignCity = catchAsync(async (req, res, next) => {
     }
     if (cityIdx === -1) {
         return next(
-            new AppError("City Not Found", 412, errorCodes.CITY_NOT_FOUND)
+            res.status(400).json("City Not Found!")
         );
     }
     await Team.findOneAndUpdate({ teamName: teamName }, {
@@ -49,36 +49,3 @@ exports.assignCity = catchAsync(async (req, res, next) => {
     console.log("updated city and vps");
     res.status(200).json('successful');
 });
-
-
-exports.hasEnded = catchAsync(async (req, res, next) => {
-    let teams = await Team.find({}).sort({ vps: -1 });
-    if (!teams) {
-        return next(
-            new AppError("Something Went Wrong", 400, errorCodes.EXCEPTION)
-        )
-    }
-    teams.forEach(async function (team) {
-        await Team.findOneAndUpdate({ "_id": team._id },
-            {
-                $set: {
-                    'hasRoundOneStarted': false,
-                    'hasRoundOneEnded': true,
-                    'currentRound': "Round 1 ended"
-                }
-            });
-    });
-    let teamsDq = await Team.find({}).sort({ vps: 1 }).limit(20);
-    teamsDq.forEach(async function (team) {
-        await Team.findOneAndUpdate({ "_id": team._id }, { $set: { 'isQualified': false } });
-    });
-    res.json("Round1 ended");
-})
-
-exports.hasStarted = catchAsync(async (req, res, next) => {
-    const teams = await Team.find({});
-    teams.forEach(async function (team) {
-        await Team.findOneAndUpdate({ "_id": team._id }, { $set: { 'hasRoundOneStarted': true, 'hasRoundOneEnded': false, 'currentRound': "Round 1" } })
-    });
-    res.json("Round1 started");
-})
