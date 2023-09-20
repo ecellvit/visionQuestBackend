@@ -6,8 +6,18 @@ exports.getVps = catchAsync(async (req, res) => {
     const result = {};
     team.forEach((t) => {
         if (t.isQualified) {
-            result[t.teamName] = t.vps
+            const industryName = t.industry;
+
+            if (!result[industryName]) {
+                result[industryName] = [];
+            }
+
+            result[industryName].push({
+                teamName: t.teamName,
+                vps: t.vps
+            });
         }
     });
+
     res.status(200).json(result)
 })

@@ -94,7 +94,8 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
       $set: {
         vps: updatedAmt,
         roiVal: roiVal,
-        valuation: valuation
+        valuation: valuation,
+        hasSubmittedSectors: true
       }
     });
     console.log(roiVal);
