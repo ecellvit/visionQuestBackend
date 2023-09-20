@@ -57,7 +57,9 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
             res.status(401).json({ "message": "Enter the same email you logged in with" })
         );
     }
-    const teamByEmail = await Team.findOne({ email: req.body.email })
+    const teamByEmail = await Team.findOne({ email: req.body.leaderEmail })
+    console.log(req.body.leaderEmail);
+    console.log(teamByEmail);
     if (teamByEmail) {
         return next(
             res.status(401).json({ "message": "Team with this Email ID already Exists" })
