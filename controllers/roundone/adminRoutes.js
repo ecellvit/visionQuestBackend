@@ -11,17 +11,17 @@ exports.assignCity = catchAsync(async (req, res, next) => {
     const team = await Team.findOne({ teamName: teamName });
     if (!team) {
         return next(
-            new AppError("Team Not Found", 412, errorCodes.INVALID_TEAM_NAME)
-        );
+            res.status(401).json({ "message": "Something Went Wrong" })
+        )
     }
     if (!team.isQualified) {
         return next(
-            new AppError("Team Not Qualified", 412, errorCodes.TEAM_NOT_QUALIFIED)
+            res.status(400).json({ "message": "Team Not Qualified" })
         );
     }
     if ((!(amt < team.vps) || !(amt > 0))) {
         return next(
-            new AppError("The amount entered is INVALID", 412, errorCodes.AMOUNT_EXCEEDED)
+            res.status(400).json({ "message": "The amount entered is INVALID" })
         );
     }
     const teamvps = team.vps - amt;
@@ -36,7 +36,7 @@ exports.assignCity = catchAsync(async (req, res, next) => {
     }
     if (cityIdx === -1) {
         return next(
-            new AppError("City Not Found", 412, errorCodes.CITY_NOT_FOUND)
+            res.status(400).json("City Not Found!")
         );
     }
     await Team.findOneAndUpdate({ teamName: teamName }, {
@@ -55,7 +55,7 @@ exports.hasEnded = catchAsync(async (req, res, next) => {
     let teams = await Team.find({}).sort({ vps: -1 });
     if (!teams) {
         return next(
-            new AppError("Something Went Wrong", 400, errorCodes.EXCEPTION)
+            res.status(400).json({ "message": "Something Went Wrong" })
         )
     }
     teams.forEach(async function (team) {

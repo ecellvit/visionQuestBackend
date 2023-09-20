@@ -4,10 +4,10 @@ const catchAsync = require('../../utils/catchAsync');
 
 exports.hasEnded = catchAsync(async (req, res, next) => {
     let teams = await Team.find({}).sort({ vps: -1 });
-    if (!teams) {
+    if (!user) {
         return next(
-            new AppError("Something Went Wrong", 400, errorCodes.EXCEPTION)
-        )
+            res.status(400).json({ "message": "Something Went Wrong" })
+        );
     }
     teams.forEach(async function (team) {
         await Team.findOneAndUpdate({ "_id": team._id },
