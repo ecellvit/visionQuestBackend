@@ -49,36 +49,3 @@ exports.assignCity = catchAsync(async (req, res, next) => {
     console.log("updated city and vps");
     res.status(200).json('successful');
 });
-
-
-exports.hasEnded = catchAsync(async (req, res, next) => {
-    let teams = await Team.find({}).sort({ vps: -1 });
-    if (!teams) {
-        return next(
-            res.status(400).json({ "message": "Something Went Wrong" })
-        )
-    }
-    teams.forEach(async function (team) {
-        await Team.findOneAndUpdate({ "_id": team._id },
-            {
-                $set: {
-                    'hasRoundOneStarted': false,
-                    'hasRoundOneEnded': true,
-                    'currentRound': "Round 1 ended"
-                }
-            });
-    });
-    let teamsDq = await Team.find({}).sort({ vps: 1 }).limit(20);
-    teamsDq.forEach(async function (team) {
-        await Team.findOneAndUpdate({ "_id": team._id }, { $set: { 'isQualified': false } });
-    });
-    res.json("Round1 ended");
-})
-
-exports.hasStarted = catchAsync(async (req, res, next) => {
-    const teams = await Team.find({});
-    teams.forEach(async function (team) {
-        await Team.findOneAndUpdate({ "_id": team._id }, { $set: { 'hasRoundOneStarted': true, 'hasRoundOneEnded': false, 'currentRound': "Round 1" } })
-    });
-    res.json("Round1 started");
-})
