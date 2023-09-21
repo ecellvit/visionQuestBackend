@@ -11,7 +11,6 @@ exports.getVps = catchAsync(async (req, res) => {
             if (!result[industryName]) {
                 result[industryName] = [];
             }
-
             result[industryName].push({
                 teamName: t.teamName,
                 valuation: t.valuation
