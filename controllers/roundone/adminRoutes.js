@@ -7,8 +7,8 @@ exports.getCity = (req, res) => {
     res.status(201).json("Team Assign Form");
 }
 exports.assignCity = catchAsync(async (req, res, next) => {
-    const { teamName, amt, city } = req.body;
-    const team = await Team.findOne({ teamName: teamName });
+    const { teamNumber, amt, city } = req.body;
+    const team = await Team.findOne({ teamNumber: teamNumber });
     if (!team) {
         return next(
             res.status(401).json({ "message": "Something Went Wrong" })
@@ -39,7 +39,7 @@ exports.assignCity = catchAsync(async (req, res, next) => {
             res.status(400).json("City Not Found!")
         );
     }
-    await Team.findOneAndUpdate({ teamName: teamName }, {
+    await Team.findOneAndUpdate({ teamNumber: teamNumber }, {
         $set: {
             city: city,
             vps: teamvps,

@@ -36,6 +36,12 @@ const teamSchema = mongoose.Schema(
         valuation: {
             type: Number
         },
+        valuationbeforecrises: {
+            type: Number
+        },
+        valuationaftercrises: {
+            type: Number
+        },
         city: {
             type: String
         },
