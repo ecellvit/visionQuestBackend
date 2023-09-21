@@ -7,5 +7,5 @@ const roundOne = require('../controllers/roundone/investingRound');
 const auth = require('../middleware/authmiddleware');
 router.route('/')
     .get(auth, roundOne.getCards)
-    .post(auth, roundOne.postInvestment)
+    .post(roundOne.postInvestment)
 module.exports = router;
