@@ -33,8 +33,17 @@ const teamSchema = mongoose.Schema(
         roiVal: {
             type: Number
         },
-        valuation: {
+        valuationafterR1:{
+            type:Number
+        },
+        valuationbeforecrises: {
             type: Number
+        },
+        valuationaftercrises:{
+            type:Number
+        },
+        valuationafterquiz:{
+            type:Number
         },
         city: {
             type: String

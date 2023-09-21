@@ -8,7 +8,7 @@ const roundTwo1=require('../controllers/roundTwo/quiz')
 const { hasRoundOneStarted } = require('../middleware/middleware');
 const auth = require('../middleware/authmiddleware');
 router.route('/')
-    .post(  roundTwo.valuation)
+    .post(  roundTwo.valuationafterR1)
     .get(roundTwo.valuationaftercrises)
 router.route('/quiz')
     .post(roundTwo1.quiz)
