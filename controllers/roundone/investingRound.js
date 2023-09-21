@@ -42,14 +42,14 @@ exports.getCards = catchAsync(async (req, res, next) => {
 });
 
 exports.postInvestment = catchAsync(async (req, res, next) => {
-  // const user = await User.findById(req.user._id);
-  // if (!user) {
-  //   return next(
-  //     res.status(401).json({ "message": "User Not Found" })
-  //   );
-  // }
-  // const email = user.email;
-  const email = "vyaskaran1409@gmail.com";
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    return next(
+      res.status(401).json({ "message": "User Not Found" })
+    );
+  }
+  const email = user.email;
+  // const email = "vyaskaran1409@gmail.com";
   const team = await Team.findOne({ leaderEmail: email });
   if (!team) {
     return next(
