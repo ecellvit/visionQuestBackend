@@ -42,6 +42,7 @@ exports.getCards = catchAsync(async (req, res, next) => {
 });
 
 exports.postInvestment = catchAsync(async (req, res, next) => {
+  console.log(req.user);
   const user = await User.findById(req.user._id);
   if (!user) {
     return next(
