@@ -25,6 +25,7 @@ exports.quiz = catchAsync(async (req, res, next) => {
       const number = teamNumber[i];
       const quizScore = scores[i];
       const team = await Team.findOne({ teamNumber: number });
+      console.log(team.vps);
       const newVps = team.vps + Math.round((quizScore / 10));
       const newValuation = newVps * 100;
       await Team.findOneAndUpdate({ teamNumber: number }, { $set: { vps: newVps, valuation: newValuation } });

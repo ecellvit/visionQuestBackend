@@ -8,7 +8,6 @@ const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
             'IT',
             'Fashion',
             'Petrochemical',
-            'Automobile',
             'Healthcare',
             'Finance',
         ];
