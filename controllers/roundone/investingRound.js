@@ -42,6 +42,14 @@ exports.getCards = catchAsync(async (req, res, next) => {
 });
 
 exports.postInvestment = catchAsync(async (req, res, next) => {
+  console.log(req.user);
+  const user = await User.findById(req.user._id);
+  if (!user) {
+    return next(
+      res.status(401).json({ "message": "User Not Found" })
+    );
+  }
+  const email = user.email;
   const user = await User.findById(req.user._id);
   if (!user) {
     return next(
