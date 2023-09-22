@@ -6,10 +6,10 @@ const assignIndustriesToTeams = catchAsync(async (req, res, next) => {
     try {
         const industries = [
             'IT',
+            'Healthcare',
             'Fashion',
             'Petrochemical',
-            'Healthcare',
-            'Finance',
+            'Finance'
         ];
         const teams = await Team.find({}).sort({ teamNumber: 1 });
         if (!teams) {
