@@ -42,7 +42,7 @@ exports.getCards = catchAsync(async (req, res, next) => {
 });
 
 exports.postInvestment = catchAsync(async (req, res, next) => {
-  console.log(req.user);
+
   const user = await User.findById(req.user._id);
   if (!user) {
     return next(
@@ -50,6 +50,7 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
     );
   }
   const email = user.email;
+  // const email = "vyaskaran1409@gmail.com";
   const team = await Team.findOne({ leaderEmail: email });
   if (!team) {
     return next(

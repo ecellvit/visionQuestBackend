@@ -11,6 +11,18 @@
         "Indore",
         "Jaipur"
     ],
+    "Healthcare": [
+        "Pune",
+        "Ahmedabad",
+        "Bangalore",
+        "Mumbai",
+        "Chennai",
+        "Hyderabad",
+        "Kolkata",
+        "Delhi-NCR",
+        "Lucknow",
+        "Patna"
+    ],
     "Fashion": [
         "Mumbai",
         "Delhi",
@@ -35,18 +47,6 @@
         "Dahej",
         "Barauni"
     ],
-    "Healthcare": [
-        "Pune",
-        "Ahmedabad",
-        "Bangalore",
-        "Mumbai",
-        "Chennai",
-        "Hyderabad",
-        "Kolkata",
-        "Delhi-NCR",
-        "Lucknow",
-        "Patna"
-    ],
     "Finance": [
         "Mumbai",
         "Delhi",
@@ -58,17 +58,5 @@
         "Pune",
         "Surat",
         "Indore"
-    ],
-    "Automobile": [
-        "Chennai",
-        "Pune",
-        "Gurugram",
-        "Ahmedabad",
-        "Bangalore",
-        "Jamshedpur",
-        "Indore",
-        "Kochi",
-        "Lucknow",
-        "Coimbatore"
     ]
 }
