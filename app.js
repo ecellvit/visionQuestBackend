@@ -49,11 +49,11 @@ process.env.NODE_ENV != "production" &&
     app.use(morgan(":method :url :status :req-headers"));
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/team', teamRoute);
-app.use('/api/auth', authRoute);
-app.use('/api/admin', adminRoute);
-app.use('/api/roundOne', round1Route);
-app.use('/api/getVps', scoreRoute);
-app.use('/api/roundTwo',round2Route);
+app.use('loaderio-44aafbd7e8ac247fab8aba002ad3a452/api/team', teamRoute);
+app.use('loaderio-44aafbd7e8ac247fab8aba002ad3a452/api/auth', authRoute);
+app.use('loaderio-44aafbd7e8ac247fab8aba002ad3a452/api/admin', adminRoute);
+app.use('loaderio-44aafbd7e8ac247fab8aba002ad3a452/api/roundOne', round1Route);
+app.use('loaderio-44aafbd7e8ac247fab8aba002ad3a452/api/getVps', scoreRoute);
+app.use('loaderio-44aafbd7e8ac247fab8aba002ad3a452/api/roundTwo', round2Route);
 //app.use('/api/admin1',adminRoute1);
 module.exports = app;

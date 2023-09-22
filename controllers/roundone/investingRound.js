@@ -42,6 +42,7 @@ exports.getCards = catchAsync(async (req, res, next) => {
 });
 
 exports.postInvestment = catchAsync(async (req, res, next) => {
+
   const user = await User.findById(req.user._id);
   if (!user) {
     return next(
@@ -49,6 +50,7 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
     );
   }
   const email = user.email;
+  // const email = "vyaskaran1409@gmail.com";
   const team = await Team.findOne({ leaderEmail: email });
   if (!team) {
     return next(
@@ -63,22 +65,22 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
   const investedAmt = req.body;
   let roiVal = 0;
   for (let i = 0; i < investedAmt.length; i++) {
-    if (investedAmt[i] != 0 && !(investedAmt[i] >= sectorVals[i])) {
+    if (investedAmt[i] < 200) {
       return next(
-        res.status(412).json({ "message": "The invested amount must be either 0 or more than the base fare" })
+        res.status(412).json({ "message": "The invested amount must be more than 200" })
       )
     }
   }
   let totalInvested = investedAmt.reduce(function (a, b) {
     return a + b;
   });
-  if (totalInvested < team.vps) {
+  if (totalInvested <= team.vps) {
     if (investedAmt.length === sectorArr.length) {
       for (let i = 0; i < investedAmt.length; i++) {
         console.log("sector: " + sectorArr[i]);
         console.log("return: " + roiJson[i][teamCityIdx] + "%");
         console.log("Amt investing in this sector: " + investedAmt[i]);
-        roiVal += ((roiJson[i][teamCityIdx]) * (investedAmt[i])) / 100;
+        roiVal += Math.round(((roiJson[i][teamCityIdx]) * (investedAmt[i])) / 100);
       }
     }
     else {
@@ -88,7 +90,8 @@ exports.postInvestment = catchAsync(async (req, res, next) => {
         )
       };
     }
-    let updatedAmt = team.vps - totalInvested + roiVal;
+    let vpsAfterInvesting = team.vps - totalInvested;
+    let updatedAmt = vpsAfterInvesting + roiVal + totalInvested;
     let valuation = updatedAmt * 100;
     await Team.findOneAndUpdate({ leaderEmail: email }, {
       $set: {

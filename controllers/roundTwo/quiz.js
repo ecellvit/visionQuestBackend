@@ -26,7 +26,11 @@ exports.quiz = catchAsync(async (req, res, next) => {
       const quizScore = scores[i];
       const team = await Team.findOne({ teamNumber: number });
       console.log(team.vps);
+<<<<<<< HEAD
       const newVps = team.vps + Math.round(((quizScore *2)/10 ));
+=======
+      const newVps = team.vps + Math.round((quizScore / 10));
+>>>>>>> ea2cee8ae6449e1805e719307354904f5691f301
       const newValuation = newVps * 100;
       await Team.findOneAndUpdate({ teamNumber: number }, { $set: { vps: newVps, valuation: newValuation } });
     }
@@ -35,4 +39,8 @@ exports.quiz = catchAsync(async (req, res, next) => {
   } catch (error) {
     console.error('An error occurred:', error);
   }
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> ea2cee8ae6449e1805e719307354904f5691f301

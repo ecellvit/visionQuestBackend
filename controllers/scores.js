@@ -11,10 +11,9 @@ exports.getVps = catchAsync(async (req, res) => {
             if (!result[industryName]) {
                 result[industryName] = [];
             }
-
             result[industryName].push({
                 teamName: t.teamName,
-                vps: t.vps
+                valuation: t.valuation
             });
         }
     });
