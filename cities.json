@@ -11,6 +11,18 @@
         "Indore",
         "Jaipur"
     ],
+    "Healthcare": [
+        "Pune",
+        "Ahmedabad",
+        "Bangalore",
+        "Mumbai",
+        "Chennai",
+        "Hyderabad",
+        "Kolkata",
+        "Delhi-NCR",
+        "Lucknow",
+        "Patna"
+    ],
     "Fashion": [
         "Mumbai",
         "Delhi",
@@ -34,18 +46,6 @@
         "Panipat",
         "Dahej",
         "Barauni"
-    ],
-    "Healthcare": [
-        "Pune",
-        "Ahmedabad",
-        "Bangalore",
-        "Mumbai",
-        "Chennai",
-        "Hyderabad",
-        "Kolkata",
-        "Delhi-NCR",
-        "Lucknow",
-        "Patna"
     ],
     "Finance": [
         "Mumbai",

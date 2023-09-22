@@ -67,7 +67,6 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
     }
     const newTeam = await new Team({
         teamName: req.body.teamName,
-        teamNumber: req.body.teamNumber,
         leaderName: req.body.leaderName,
         leaderEmail: req.body.leaderEmail,
         vps: 15000,
