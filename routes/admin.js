@@ -14,4 +14,6 @@ router.route('/dq')
     .get(dq.disQualify);
 router.route('/changeState')
     .post(changeState)
+
+    
 module.exports = router;
