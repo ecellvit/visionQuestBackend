@@ -44,12 +44,12 @@ exports.makeTeam = catchAsync(async (req, res, next) => {
         );
     }
 
-    const team_by_number = await Team.findOne({ teamNumber: req.body.teamNumber });
-    if (team_by_number) {
-        return next(
-            res.status(412).json({ "message": "Team Number Already Exists" })
-        );
-    };
+    // const team_by_number = await Team.findOne({ teamNumber: req.body.teamNumber });
+    // if (team_by_number) {
+    //     return next(
+    //         res.status(412).json({ "message": "Team Number Already Exists" })
+    //     );
+    // };
     const userID = req.user._id;
     const user = await User.findById(userID);
     if (req.body.leaderEmail !== user.email) {

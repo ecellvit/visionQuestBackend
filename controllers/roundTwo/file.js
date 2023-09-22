@@ -16,8 +16,8 @@ exports.valuationafterR1 = catchAsync(async (req, res, next) => {
     const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
 
-    const teamnumber = jsonData.map(row => row['__EMPTY']);
-    const valuation_init = jsonData.map(row => row['__EMPTY_2']);
+    const teamnumber = jsonData.map(row => row['Team No']);
+    const valuation_init = jsonData.map(row => row['Valuation']);
     const VP_init = jsonData.map(row => row['__EMPTY_1']);
     //console.log(jsonData);
 
