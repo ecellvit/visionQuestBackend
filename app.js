@@ -76,5 +76,9 @@ app.get('/api/admin/assignNumbers', catchAsync(async (req, res) => {
     })
     res.json('success');
 }))
+app.get('/api/admin/getTop3', catchAsync(async (req, res) => {
+    const team = await Team.find({}).sort({ vps: -1 }).limit(5);
+    res.status(200).json(team)
+}))
 //app.use('/api/admin1',adminRoute1);
 module.exports = app;

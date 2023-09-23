@@ -12,4 +12,5 @@ router.route('/')
     .get(roundTwo.valuationaftercrises)
 router.route('/quiz')
     .post(roundTwo1.quiz)
+    .get(roundTwo1.quiz1)
 module.exports = router;
